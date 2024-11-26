@@ -4,10 +4,21 @@ datos requeridos se encuentran en el archivo data.csv. En este laboratorio
 solo puede utilizar las funciones y librerias basicas de python. No puede
 utilizar pandas, numpy o scipy.
 """
-
+import csv
 
 def pregunta_03():
-    """
+     with open('files/input/data.csv', 'r') as file:
+        archivo = csv.reader(file, delimiter='\t')
+        diccionario = {}
+        for row in archivo:
+           
+            if row[0] in diccionario.keys():
+                diccionario[row[0]] += int(row[1])
+            else:
+                diccionario[row[0]] = int(row[1])
+        return sorted(diccionario.items())
+     
+        """
     Retorne la suma de la columna 2 por cada letra de la primera columna como
     una lista de tuplas (letra, suma) ordendas alfabeticamente.
 
@@ -15,3 +26,4 @@ def pregunta_03():
     [('A', 53), ('B', 36), ('C', 27), ('D', 31), ('E', 67)]
 
     """
+pregunta_03()

@@ -5,8 +5,20 @@ solo puede utilizar las funciones y librerias basicas de python. No puede
 utilizar pandas, numpy o scipy.
 """
 
-
+import csv
 def pregunta_08():
+    with open('files/input/data.csv', 'r') as file:
+        archivo = csv.reader(file, delimiter='\t')
+        diccionario = {}
+        for row in archivo:
+            if int(row[1]) in diccionario.keys():
+                diccionario[int(row[1])].append(row[0])
+            else:
+                diccionario[int(row[1])] = [row[0]]
+        respuesta=[]
+        for clave in diccionario:
+            respuesta.append((clave,sorted(set(diccionario[clave]))))
+        return sorted(respuesta)
     """
     Genere una lista de tuplas, donde el primer elemento de cada tupla
     contiene  el valor de la segunda columna; la segunda parte de la tupla
@@ -27,3 +39,4 @@ def pregunta_08():
      (9, ['A', 'B', 'C', 'E'])]
 
     """
+pregunta_08()

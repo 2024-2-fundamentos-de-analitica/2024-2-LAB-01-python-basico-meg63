@@ -4,10 +4,28 @@ datos requeridos se encuentran en el archivo data.csv. En este laboratorio
 solo puede utilizar las funciones y librerias basicas de python. No puede
 utilizar pandas, numpy o scipy.
 """
-
+import csv
 
 def pregunta_06():
-    """
+     with open('files/input/data.csv', 'r') as file:
+        archivo = csv.reader(file, delimiter='\t')
+        diccionario = {}
+        for row in archivo:
+            claves=row[4].split(",")
+            for clave in claves:
+                codigo=clave.split(":")
+                if codigo[0] in diccionario.keys():
+                    diccionario[codigo[0]].append(int(codigo[1]))
+                else:
+                    diccionario[codigo[0]]=[int(codigo[1])]
+            
+        respuesta=[]
+        for clave in diccionario:
+            respuesta.append((clave,min(diccionario[clave]),max(diccionario[clave])))
+        return sorted(respuesta)
+      
+      
+"""
     La columna 5 codifica un diccionario donde cada cadena de tres letras
     corresponde a una clave y el valor despues del caracter `:` corresponde al
     valor asociado a la clave. Por cada clave, obtenga el valor asociado mas
@@ -26,3 +44,4 @@ def pregunta_06():
      ('jjj', 5, 17)]
 
     """
+pregunta_06()

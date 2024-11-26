@@ -4,9 +4,19 @@ datos requeridos se encuentran en el archivo data.csv. En este laboratorio
 solo puede utilizar las funciones y librerias basicas de python. No puede
 utilizar pandas, numpy o scipy.
 """
-
+import csv
 
 def pregunta_07():
+    with open('files/input/data.csv', 'r') as file:
+        archivo = csv.reader(file, delimiter='\t')
+        diccionario = {}
+        for row in archivo:
+            if int(row[1]) in diccionario.keys():
+                diccionario[int(row[1])].append(row[0])
+            else:
+                diccionario[int(row[1])] = [row[0]]
+        return sorted(diccionario.items())
+
     """
     Retorne una lista de tuplas que asocien las columnas 0 y 1. Cada tupla
     contiene un valor posible de la columna 2 y una lista con todas las letras
@@ -25,3 +35,4 @@ def pregunta_07():
      (9, ['A', 'B', 'E', 'A', 'A', 'C'])]
 
     """
+pregunta_07()
